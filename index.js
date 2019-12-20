@@ -12,6 +12,7 @@ const autoban = require("./features/autoban").default;
 const commands = require("./features/commands").default;
 const witInvite = require("./features/wit-invite").default;
 const stats = require("./features/stats").default;
+const deduper = require("./features/deduper").default;
 
 const bot = new discord.Client();
 bot.login(process.env.DISCORD_HASH);
@@ -81,6 +82,9 @@ logger.add(channelLog(bot, "479862475047567361"));
 // Amplitude metrics
 stats(bot);
 
+// start deduper cleaner
+deduper.registerCleaner();
+
 // reactiflux
 channelHandlers.addHandler("103882387330457600", jobs);
 channelHandlers.addHandler("541673256596537366", witInvite); // #women-in-tech
@@ -94,6 +98,7 @@ channelHandlers.addHandler("479862475047567361", qna); // #general
 channelHandlers.addHandler("*", commands);
 // channelHandlers.addHandler('*', codeblock);
 channelHandlers.addHandler("*", autoban);
+channelHandlers.addHandler("*", deduper);
 
 bot.on("messageReactionAdd", (reaction, user) => {
   channelHandlers.handleReaction(reaction, user);
