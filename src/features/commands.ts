@@ -392,6 +392,19 @@ To integrate it into your editor: https://prettier.io/docs/en/editors.html`,
         }
       });
     }
+  },
+  {
+    words: [`!crosspost`, `!xpost`],
+    help: `explains why and how to avoid crossposting`,
+    handleMessage: msg => {
+      msg.channel.send({
+        embed: {
+          title: "Crossposting",
+          type: "rich",
+          description: `Do not crosspost messages by copying and pasting them into multiple channels. This makes it harder to help you as discussions may be broken up into multiple channels, and takes more space from other users asking questions. Instead, post your message once to the channel you think is most relevant.`
+        }
+      });
+    }
   }
 ];
 
