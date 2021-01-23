@@ -1,4 +1,4 @@
-import { GuildMember } from "discord.js";
+import { Guild, GuildMember, TextChannel } from "discord.js";
 
 const staffRoles = ["mvp", "moderator", "admin", "admins"];
 
@@ -21,3 +21,20 @@ export const truncateMessage = (
 
   return message;
 };
+
+export const getModLogChannel = (guild: Guild) => {
+  return guild.channels.cache.find(
+    channel => channel.name === "mod-log" || channel.id === "257930126145224704"
+  ) as TextChannel;
+};
+
+export const formatDate = (date: Date) =>
+  date.toLocaleString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true
+  });
